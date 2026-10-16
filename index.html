@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Projects | Web Development</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  body { font-family:'Poppins',sans-serif; margin:0; background:#f7f3ed; }
+
+  .projects-page {
+    min-height: 100vh;
+    padding: 60px 24px;
+    background: #f7f3ed;
+    color: #352b25;
+  }
+
+  .projects-container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .projects-heading {
+    margin-bottom: 12px;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 6vw, 56px);
+    text-align: center;
+  }
+
+  .projects-intro {
+    margin-bottom: 40px;
+    text-align: center;
+    color: #75675e;
+  }
+
+  .project-list-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 8px 30px rgba(53, 43, 37, 0.08);
+  }
+
+  .project-list-image {
+    width: 100%;
+    height: 100%;
+    min-height: 280px;
+    object-fit: cover;
+  }
+
+  .project-list-content {
+    padding: 32px;
+    align-self: center;
+  }
+
+  .project-list-content h2 {
+    margin: 0 0 12px;
+    font-family: 'Playfair Display', serif;
+  }
+
+  .project-list-content p {
+    line-height: 1.7;
+    color: #75675e;
+  }
+
+  .btn-view-project {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 12px 22px;
+    border-radius: 8px;
+    background: #76533f;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .btn-view-project:hover {
+    background: #5b3f30;
+  }
+
+  @media (max-width:700px) {
+    .projects-page { padding: 40px 16px; }
+    .project-list-card { grid-template-columns: 1fr; }
+    .project-list-image { min-height: 200px; max-height: 260px; }
+    .project-list-content { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<section class="projects-page">
+  <div class="projects-container">
+    <h1 class="projects-heading">My Projects</h1>
+    <p class="projects-intro">
+      A collection of my web development projects.
+    </p>
+
+    <article class="project-list-card">
+      <img
+        src="./Activity%201%20Bento/images/hero-cafe.jpg"
+        alt="Café Hopping Bento Project"
+        class="project-list-image"
+      >
+
+      <div class="project-list-content">
+        <h2>WebDev Bento Project</h2>
+        <p>
+          A visual café-hopping diary featuring cozy cafés,
+          coffee moments, and a Bento-inspired layout.
+        </p>
+
+        <a href="./Activity%201%20Bento/bento.html" class="btn-view-project">View Project →</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+</body>
+</html>
