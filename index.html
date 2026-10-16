@@ -22,8 +22,32 @@
     margin: 0 auto;
   }
 
+  /* Top bar with back button */
+  .projects-topbar {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 24px;
+  }
+
+  .btn-back {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 1px solid #76533f;
+    border-radius: 8px;
+    color: #76533f;
+    background: transparent;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all .2s ease;
+  }
+
+  .btn-back:hover {
+    background: #76533f;
+    color: #fff;
+  }
+
   .projects-heading {
-    margin-bottom: 12px;
+    margin: 0 0 12px;
     font-family: 'Playfair Display', serif;
     font-size: clamp(36px, 6vw, 56px);
     text-align: center;
@@ -35,45 +59,81 @@
     color: #75675e;
   }
 
-  .project-list-card {
+  /* Card grid */
+  .project-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 28px;
+  }
+
+  .project-card {
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
     background: #fff;
     border-radius: 18px;
     box-shadow: 0 8px 30px rgba(53, 43, 37, 0.08);
+    transition: transform .2s ease, box-shadow .2s ease;
   }
 
-  .project-list-image {
+  .project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 34px rgba(53, 43, 37, 0.15);
+  }
+
+  .project-image {
     width: 100%;
-    height: 100%;
-    min-height: 280px;
+    height: 210px;
     object-fit: cover;
+    display: block;
+    background: #e6dccf;
   }
 
-  .project-list-content {
-    padding: 32px;
-    align-self: center;
+  .project-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 24px;
+    flex: 1;
   }
 
-  .project-list-content h2 {
-    margin: 0 0 12px;
+  .project-content h2 {
+    margin: 0;
     font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
   }
 
-  .project-list-content p {
+  .project-content p {
+    margin: 0;
     line-height: 1.7;
     color: #75675e;
+    font-size: .92rem;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .project-tags span {
+    font-size: 12px;
+    padding: 3px 12px;
+    border: 1px solid #d9c3b0;
+    border-radius: 30px;
+    color: #76533f;
+    background: #fbf7f2;
   }
 
   .btn-view-project {
-    display: inline-block;
-    margin-top: 12px;
+    align-self: flex-start;
+    margin-top: auto;
     padding: 12px 22px;
     border-radius: 8px;
     background: #76533f;
     color: #fff;
     text-decoration: none;
+    font-size: 14px;
   }
 
   .btn-view-project:hover {
@@ -82,9 +142,8 @@
 
   @media (max-width:700px) {
     .projects-page { padding: 40px 16px; }
-    .project-list-card { grid-template-columns: 1fr; }
-    .project-list-image { min-height: 200px; max-height: 260px; }
-    .project-list-content { padding: 24px; }
+    .project-grid { grid-template-columns: 1fr; }
+    .project-image { height: 200px; }
   }
 </style>
 </head>
@@ -92,28 +151,41 @@
 
 <section class="projects-page">
   <div class="projects-container">
+
+    <div class="projects-topbar">
+      <a href="https://angelicadeniseariola.github.io/angelicadeniseario/" class="btn-back">&larr; Back to Portfolio</a>
+    </div>
+
     <h1 class="projects-heading">My Projects</h1>
     <p class="projects-intro">
       A collection of my web development projects.
     </p>
 
-    <article class="project-list-card">
-      <img
-        src="./Activity%201%20Bento/images/hero-cafe.jpg"
-        alt="Café Hopping Bento Project"
-        class="project-list-image"
-      >
+    <div class="project-grid">
 
-      <div class="project-list-content">
-        <h2>WebDev Bento Project</h2>
-        <p>
-          A visual café-hopping diary featuring cozy cafés,
-          coffee moments, and a Bento-inspired layout.
-        </p>
+      <article class="project-card">
+        <img
+          src="./Activity%201%20Bento/images/hero-cafe.jpg"
+          alt="Café Hopping Bento Project"
+          class="project-image"
+        >
+        <div class="project-content">
+          <div class="project-tags">
+            <span>Web Development</span>
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>Responsive</span>
+          </div>
+          <h2>WebDev Bento Project</h2>
+          <p>
+            A visual café-hopping diary featuring cozy cafés,
+            coffee moments, and a Bento-inspired layout.
+          </p>
+          <a href="./Activity%201%20Bento/bento.html" class="btn-view-project">View Project →</a>
+        </div>
+      </article>
 
-        <a href="./Activity%201%20Bento/bento.html" class="btn-view-project">View Project →</a>
-      </div>
-    </article>
+    </div>
   </div>
 </section>
 
