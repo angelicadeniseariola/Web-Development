@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My K-pop Groups</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --cream: #f8f4ee;
+      --ink: #2d2420;
+      --muted: #6f5f55;
+      --brown: #77543f;
+      --brown-dark: #5f4130;
+      --chip-bg: #fcf7f1;
+      --chip-border: #e6d5c5;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: "Poppins", sans-serif;
+    }
+
+    h1,
+    h2,
+    h3,
+    .tile-name {
+      font-family: "Playfair Display", serif;
+      color: var(--ink);
+    }
+
+    .btn-back {
+      display: inline-block;
+      padding: 10px 20px;
+      border: 1px solid var(--brown);
+      border-radius: 8px;
+      color: var(--brown);
+      background: transparent;
+      text-decoration: none;
+      font-size: 14px;
+      transition: all .2s ease;
+    }
+
+    .btn-back:hover {
+      background: var(--brown);
+      color: #fff;
+    }
+
+    .top-space {
+      min-height: 280px;
+      padding-top: 1rem;
+      text-align: center;
+    }
+
+    .top-space h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+    }
+
+    .top-space p {
+      color: var(--muted);
+    }
+
+    .group-tile {
+      background: #fff;
+      border: 0;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 .5rem 1.5rem rgba(90, 60, 40, .10);
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+
+    .group-tile:hover,
+    .group-tile:focus-visible {
+      transform: translateY(-4px);
+      box-shadow: 0 .75rem 2rem rgba(90, 60, 40, .18);
+    }
+
+    .carousel-inner {
+      aspect-ratio: 4 / 3;
+      background: #eadfd3;
+    }
+
+    .carousel-item {
+      height: 100%;
+    }
+
+    .slide-bg {
+      position: absolute;
+      inset: -24px;
+      background-size: cover;
+      background-position: center;
+      filter: blur(18px) brightness(.92);
+    }
+
+    .tile-photo {
+      position: relative;
+      z-index: 1;
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      background: var(--chip-bg);
+      border: 1px solid var(--chip-border);
+      color: var(--brown-dark);
+      border-radius: 999px;
+      padding: .25rem .8rem;
+      font-size: .8rem;
+    }
+
+    .chip-dot {
+      width: .55rem;
+      height: .55rem;
+      border-radius: 50%;
+      background: var(--dot);
+    }
+
+    .tile-name {
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
+
+    .tile-desc {
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .btn-brown {
+      background: var(--brown);
+      color: #fff;
+      border: 0;
+      border-radius: .6rem;
+      padding: .65rem 1.4rem;
+      font-weight: 500;
+    }
+
+    .btn-brown:hover {
+      background: var(--brown-dark);
+      color: #fff;
+    }
+
+    .modal-content {
+      border: 0;
+      border-radius: 1.25rem;
+      overflow: hidden;
+    }
+
+    .modal-header {
+      border-bottom-color: var(--chip-border);
+    }
+
+    .modal-photo {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: contain;
+      border-radius: 1rem;
+      background: #eadfd3;
+    }
+
+    .table thead th {
+      background: var(--brown);
+      color: #fff;
+      border-color: var(--brown);
+    }
+
+    .info-table th {
+      width: 40%;
+      background: var(--chip-bg);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container py-4">
+    <div class="top-space">
+      <div class="text-start mb-4">
+        <a href="../index.html" class="btn-back">&larr; Back to Projects</a>
+      </div>
+      <h1 class="fw-bold">My K-pop Groups</h1>
+      <p class="mb-0">A collection of my favorite K-pop groups.</p>
+    </div>
+    <div class="row g-4" id="parent">
+
+
+
+    </div>
+  </div>
+
+  <div class="modal fade" id="groupModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content" id="modalContent">
+        <div class="modal-header">
+          <h2 class="modal-title h3 fw-bold" id="modalTitle"></h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="modalBody"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+
+  <script>
+    var groups = [
+      {
+        name: "BTS",
+        photoPrefix: "assets/bts",
+        company: "BIGHIT MUSIC (HYBE)",
+        debutYear: 2013,
+        fandom: "ARMY",
+        color: "#7b5cd6",
+        description: "Seven-member boy group that debuted in 2013 under BIGHIT MUSIC and grew from a small company act into one of the biggest names in music worldwide. They are known for sharp choreography, their deep involvement in making their own music, and a loyal global fandom called ARMY.",
+        members: [
+          { name: "RM", role: "Leader, Rapper", origin: "South Korea" },
+          { name: "Jin", role: "Vocalist", origin: "South Korea" },
+          { name: "SUGA", role: "Rapper", origin: "South Korea" },
+          { name: "j-hope", role: "Rapper, Dancer", origin: "South Korea" },
+          { name: "Jimin", role: "Vocalist, Dancer", origin: "South Korea" },
+          { name: "V", role: "Vocalist", origin: "South Korea" },
+          { name: "Jungkook", role: "Main Vocalist", origin: "South Korea" }
+        ]
+      }, {
+        name: "ENHYPEN",
+        photoPrefix: "assets/enhypen",
+        company: "BELIFT LAB (HYBE)",
+        debutYear: 2020,
+        fandom: "ENGENE",
+        color: "#c0392b",
+        description: "Formed through the survival show I-LAND and debuted on November 30, 2020 under BELIFT LAB. Their albums, music videos, and performances follow a vampire-inspired storyline. Originally seven members, they have continued as a six-member group since March 2026.",
+        members: [
+          { name: "Jungwon", role: "Leader, Vocalist", origin: "South Korea" },
+          { name: "Jay", role: "Rapper, Dancer", origin: "South Korea / USA" },
+          { name: "Jake", role: "Vocalist", origin: "South Korea / Australia" },
+          { name: "Sunghoon", role: "Vocalist, Dancer", origin: "South Korea" },
+          { name: "Sunoo", role: "Vocalist", origin: "South Korea" },
+          { name: "Ni-ki", role: "Main Dancer", origin: "Japan" }
+        ]
+      }, {
+        name: "AHOF",
+        photoPrefix: "assets/ahof",
+        company: "F&F Entertainment",
+        debutYear: 2025,
+        fandom: "FOHA",
+        color: "#1f9d8b",
+        description: "Nine-member multinational group formed through SBS's Universe League and debuted on July 1, 2025 as the first boy group of F&F Entertainment. The name stands for All-Time Hall Of Famer and also sounds like the Korean word for nine. The members come from six countries: South Korea, China, Japan, Taiwan, Australia, and the Philippines.",
+        members: [
+          { name: "Steven", role: "Leader", origin: "Australia" },
+          { name: "Jeongwoo", role: "Member", origin: "South Korea" },
+          { name: "Woongki", role: "Member", origin: "South Korea" },
+          { name: "Shuaibo", role: "Member", origin: "China" },
+          { name: "Han", role: "Member", origin: "South Korea" },
+          { name: "JL", role: "Member", origin: "Philippines" },
+          { name: "Juwon", role: "Member", origin: "South Korea" },
+          { name: "Chihen", role: "Member", origin: "Taiwan" },
+          { name: "Daisuke", role: "Maknae", origin: "Japan" }
+        ]
+      }, {
+        name: "PLAVE",
+        photoPrefix: "assets/plave",
+        company: "VLAST",
+        debutYear: 2023,
+        fandom: "PLLI",
+        color: "#e0529c",
+        description: "Virtual idol group under VLAST that debuted on March 12, 2023. Real performers use motion-capture technology to bring their anime-style avatars to life, and the members are credited on their released songs. Their story follows five members from a world called Caelum who connect with their fans, PLLI.",
+        members: [
+          { name: "Yejun", role: "Leader", origin: "South Korea" },
+          { name: "Noah", role: "Member", origin: "South Korea" },
+          { name: "Bamby", role: "Member", origin: "South Korea" },
+          { name: "Eunho", role: "Member", origin: "South Korea" },
+          { name: "Hamin", role: "Maknae", origin: "South Korea" }
+        ]
+      }, {
+        name: "ZEROBASEONE",
+        photoPrefix: "assets/zerobaseone",
+        company: "WAKEONE",
+        debutYear: 2023,
+        fandom: "ZEROSE",
+        color: "#2f6fdb",
+        description: "Formed through Mnet's Boys Planet and debuted in 2023 under WAKEONE as a nine-member group. After their project contract ended in March 2026, five members (Sung Hanbin, Kim Jiwoong, Seok Matthew, Kim Taerae, and Park Gunwook) continued together for a new season.",
+        members: [
+          { name: "Sung Hanbin", role: "Leader, Main Dancer, Lead Vocalist", origin: "South Korea" },
+          { name: "Kim Jiwoong", role: "Sub Rapper, Lead Dancer, Visual", origin: "South Korea" },
+          { name: "Seok Matthew", role: "Lead Rapper", origin: "South Korea / Canada" },
+          { name: "Kim Taerae", role: "Main Vocalist", origin: "South Korea" },
+          { name: "Park Gunwook", role: "Main Rapper", origin: "South Korea" }
+        ]
+      }, {
+        name: "AND2BLE",
+        photoPrefix: "assets/and2ble",
+        company: "YH Entertainment",
+        debutYear: 2026,
+        fandom: "N:DCLO",
+        color: "#e8a317",
+        description: "Boy group under YH Entertainment that debuted on May 26, 2026 with the mini album Sequence 01: Curiosity. Four members are former ZEROBASEONE members, joined by Yoo Seungeon, who first debuted with EVNNE. The name blends AND and DOUBLE, meaning showing more than one side of yourself.",
+        members: [
+          { name: "Zhang Hao", role: "Member", origin: "China" },
+          { name: "Yoo Seungeon", role: "Member", origin: "South Korea" },
+          { name: "Ricky", role: "Member", origin: "China" },
+          { name: "Kim Gyuvin", role: "Rapper", origin: "South Korea" },
+          { name: "Han Yujin", role: "Member", origin: "South Korea" }
+        ]
+      }
+    ]
+
+    function fallback(img) {
+      img.onerror = null;
+      img.src = "data:image/svg+xml;utf8," + encodeURIComponent(
+        '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400">' +
+        '<rect width="100%" height="100%" fill="#eadfd3"/>' +
+        '<text x="50%" y="50%" fill="#8a6f5c" font-family="sans-serif" font-size="28" font-weight="bold" ' +
+        'text-anchor="middle" dominant-baseline="middle">' + img.dataset.name + '</text></svg>'
+      );
+    }
+
+    var parent = document.getElementById("parent");
+
+    function renderGroups() {
+    var html = "";
+    for (var i = 0; i < groups.length; i++) {
+
+      var slides = "";
+      for (var p = 0; p < groups[i].images.length; p++) {
+        slides += `
+            <div class="carousel-item ` + (p == 0 ? "active" : "") + `">
+              <div class="slide-bg" style="background-image: url('` + groups[i].images[p] + `')"></div>
+              <img src="` + groups[i].images[p] + `" class="tile-photo" alt="` + groups[i].name + ` photo ` + (p + 1) + `"
+                data-name="` + groups[i].name + `" onerror="fallback(this)">
+            </div>`;
+      }
+
+      html += `
+        <div class="col-12 col-md-6 col-xl-4">
+          <div class="card group-tile h-100"
+            role="button" tabindex="0" onclick="openGroup(` + i + `)"
+            onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openGroup(` + i + `); }">
+
+            <div id="carousel-` + i + `" class="carousel slide carousel-fade">
+              <div class="carousel-inner">` + slides + `
+              </div>
+            </div>
+
+            <div class="card-body p-4 d-flex flex-column">
+              <div class="mb-3">
+                <span class="chip" style="--dot: ` + groups[i].color + `">
+                  <span class="chip-dot"></span>Fandom: ` + groups[i].fandom + `
+                </span>
+              </div>
+              <h3 class="tile-name mb-2">` + groups[i].name + `</h3>
+              <p class="tile-desc">` + groups[i].description + `</p>
+              <div class="mt-auto pt-2">
+                <span class="btn btn-brown">View Members &rarr;</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+    parent.innerHTML = html;
+
+    var carousels = document.querySelectorAll(".carousel");
+    for (var c = 0; c < carousels.length; c++) {
+      var slideshow = new bootstrap.Carousel(carousels[c], { interval: 3000, pause: false, touch: false, wrap: true });
+      slideshow.cycle();
+    }
+
+    }
+
+    function openGroup(index) {
+      var g = groups[index];
+
+      var membersHTML = "";
+      if (g.members.length == 0) {
+        membersHTML = `<p class="text-muted mb-0">No members listed yet.</p>`;
+      } else {
+        var rows = "";
+        for (var j = 0; j < g.members.length; j++) {
+          rows += `
+            <tr>
+              <th scope="row">` + (j + 1) + `</th>
+              <td>` + g.members[j].name + `</td>
+              <td>` + g.members[j].role + `</td>
+              <td>` + g.members[j].origin + `</td>
+            </tr>`;
+        }
+        membersHTML = `
+          <div class="table-responsive">
+            <table class="table table-striped table-hover align-middle mb-0">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Role</th>
+                  <th scope="col">Origin</th>
+                </tr>
+              </thead>
+              <tbody>` + rows + `</tbody>
+            </table>
+          </div>`;
+      }
+
+      document.getElementById("modalContent").style.setProperty("--accent", g.color);
+      document.getElementById("modalTitle").innerHTML = g.name;
+      document.getElementById("modalBody").innerHTML = `
+        <div class="row g-4">
+          <div class="col-sm-4">
+            <img src="` + (g.mainImage || g.images[0]) + `" class="modal-photo" alt="` + g.name + `"
+              data-name="` + g.name + `" onerror="fallback(this)">
+          </div>
+          <div class="col-sm-8">
+            <span class="fandom badge rounded-pill px-3 py-2 mb-3">Fandom: ` + g.fandom + `</span>
+            <table class="table table-bordered info-table mb-0">
+              <tbody>
+                <tr><th scope="row">Company</th><td>` + g.company + `</td></tr>
+                <tr><th scope="row">Debut Year</th><td>` + g.debutYear + `</td></tr>
+                <tr><th scope="row">No. of Members</th><td>` + g.members.length + `</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-12">
+            <div class="h5">Members</div>
+            ` + membersHTML + `
+          </div>
+        </div>
+      `;
+
+      bootstrap.Modal.getOrCreateInstance(document.getElementById("groupModal")).show();
+    }
+
+    var extensions = ["jpg", "jpeg", "png", "webp"];
+
+    function imageExists(src) {
+      return new Promise(function (resolve) {
+        var test = new Image();
+        test.onload = function () { resolve(true); };
+        test.onerror = function () { resolve(false); };
+        test.src = src;
+      });
+    }
+
+    async function findImages(g) {
+      if (g.images && g.images.length > 0) {
+        return g.images;   
+      }
+      var found = [];
+      for (var n = 1; n <= 30; n++) {
+        var hit = null;
+        for (var e = 0; e < extensions.length; e++) {
+          var path = g.photoPrefix + "-" + n + "." + extensions[e];
+          if (await imageExists(path)) {
+            hit = path;
+            break;
+          }
+        }
+        if (hit == null) {
+          break;   
+        }
+        found.push(hit);
+      }
+      if (found.length == 0) {
+        found.push(g.photoPrefix + "-1.jpg");   
+      }
+      return found;
+    }
+
+    async function findMain(g) {
+      if (g.main) {
+        return g.main;   
+      }
+      for (var e = 0; e < extensions.length; e++) {
+        var path = g.photoPrefix + "-main." + extensions[e];
+        if (await imageExists(path)) {
+          return path;
+        }
+      }
+      return null;   
+    }
+
+    Promise.all(groups.map(function (g) {
+      return Promise.all([findImages(g), findMain(g)]);
+    })).then(function (results) {
+      for (var i = 0; i < groups.length; i++) {
+        groups[i].images = results[i][0];
+        groups[i].mainImage = results[i][1];
+      }
+      renderGroups();
+    });
+  </script>
+
+</body>
+
+</html>
